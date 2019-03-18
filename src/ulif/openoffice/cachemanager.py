@@ -30,7 +30,7 @@ def get_marker(options=dict()):
     """
     result = sorted(options.items())
     result = '%s' % result
-    return base64url_encode(result).replace('=', '')
+    return base64url_encode(bytes(result, 'utf-8')).replace('=', '')
 
 
 class Bucket(object):
