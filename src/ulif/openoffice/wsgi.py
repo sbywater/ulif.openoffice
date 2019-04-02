@@ -169,16 +169,16 @@ class RESTfulDocConverter(object):
 
     def index(self, req):
         # get index of all docs
-        return Response(str(mydocs.keys()))
+        return Response(str(list(mydocs.keys())))
 
     def create(self, req):
         # post a new doc
-        options = dict([(name, val) for name, val in req.params.items()
+        options = dict([(name, val) for name, val in list(req.params.items())
                         if name not in ('CREATE', 'doc', 'docid')])
-        if 'out_fmt' in req.params.keys():
+        if 'out_fmt' in list(req.params.keys()):
             options['oocp-out-fmt'] = options['out_fmt']
             del options['out_fmt']
-        if 'CREATE' in req.params.keys():
+        if 'CREATE' in list(req.params.keys()):
             if options.get('oocp-out-fmt', 'html') == 'pdf':
                 options['meta-procord'] = 'unzip,oocp,zip'
         doc = req.POST['doc']

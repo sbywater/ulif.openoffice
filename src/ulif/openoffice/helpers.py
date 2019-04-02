@@ -126,7 +126,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
 
 
 def copy_to_secure_location(src):
-    """Copy `src` to a temporay location.
+    """Copy `src` to a temporary location.
 
     If `src` is a file, the complete directory containing this file
     will be copied. If `src` is a directory this directory will be
@@ -454,7 +454,7 @@ def rename_html_img_links(html_input, basename):
         src = tag.get('src', None)
         if src is None:
             continue
-        if src in img_map.keys():
+        if src in list(img_map.keys()):
             # We found a link to the same image already
             tag['src'] = img_map[src]
             continue

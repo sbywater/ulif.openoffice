@@ -99,7 +99,7 @@ def convert(
         new_dir = tempfile.mkdtemp()
     logger.debug('Created dir: %s' % new_dir)
     cmd = '%s -c %s -f %s -o %s' % (
-        executable, url, out_format, new_dir)
+        executable, url, out_format, path)
     cmd += ' -d %s' % (doctype,)
     if template is not None:
         cmd += ' -t %s' % (template,)

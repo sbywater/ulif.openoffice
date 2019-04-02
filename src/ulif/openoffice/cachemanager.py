@@ -420,5 +420,5 @@ class CacheManager(object):
         for path in glob.glob(glob_expr):
             md5_hash = os.path.basename(path)
             bucket = Bucket(path)
-            for bucket_key in bucket.keys():
+            for bucket_key in list(bucket.keys()):
                 yield '%s_%s' % (md5_hash, bucket_key)

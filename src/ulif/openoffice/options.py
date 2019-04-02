@@ -162,7 +162,7 @@ class Options(dict):
         ``string_dict={'oocp-out-fmt': 'pdf'}``.
         """
         result = []
-        for proc in self.avail_procs.values():
+        for proc in list(self.avail_procs.values()):
             result.extend([x.short_name[1:] for x in proc.args])
         return sorted(result)
 
@@ -191,7 +191,7 @@ class Options(dict):
         if parser is None:
             parser = ExceptionalArgumentParser()
         # set defaults
-        for proc_name, proc in self.avail_procs.items():
+        for proc_name, proc in list(self.avail_procs.items()):
             for arg in proc.args:
                 parser.add_argument(
                     arg.short_name, arg.long_name, **arg.keywords)

@@ -55,7 +55,7 @@ DEFAULT_PROCORDER = 'unzip,oocp,tidy,html_cleaner,css_cleaner,zip'
 
 def processor_order(string):
     proc_tuple = string_to_stringtuple(string)
-    proc_names = get_entry_points('ulif.openoffice.processors').keys()
+    proc_names = list(get_entry_points('ulif.openoffice.processors').keys())
     for name in proc_tuple:
         if name not in proc_names:
             raise ValueError('Only values in %r are allowed.' % proc_names)
@@ -255,7 +255,7 @@ class OOConvProcessor(BaseProcessor):
                  default='html',
                  help=(
                      'Output format to create via LibreOffice.'
-                     'Pick from: %s' % ', '.join(OUTPUT_FORMATS.keys())),
+                     'Pick from: %s' % ', '.join(list(OUTPUT_FORMATS.keys()))),
                  metavar='FORMAT',
                  ),
         Argument('-oocp-pdf-version', '--oocp-pdf-version',
@@ -364,7 +364,7 @@ class ZipProcessor(BaseProcessor):
         if os.path.isfile(path):
             basename = os.path.basename(path)
         path = os.path.dirname(path)
-        zip_file = zip(path)
+        zip_file = list(zip(path))
         shutil.rmtree(path)
         result_path = os.path.join(
             os.path.dirname(zip_file), basename + '.zip')
@@ -519,7 +519,7 @@ class HTMLCleaner(BaseProcessor):
         return src_path, metadata
 
     def rename_img_files(self, src_dir, img_name_map):
-        for old_img, new_img in img_name_map.items():
+        for old_img, new_img in list(img_name_map.items()):
             old_path = os.path.join(src_dir, old_img)
             new_path = os.path.join(src_dir, new_img)
             if not os.path.isfile(old_path):

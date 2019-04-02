@@ -270,7 +270,7 @@ class WSGILikeHTTP(object):
 
     def getresponse(self, buffering=True):
         req = Request.blank(self.handler)
-        for key, val in self.headers.items():
+        for key, val in list(self.headers.items()):
             req.headers[key] = val
         req.method = self.method
         req.body = self.body
