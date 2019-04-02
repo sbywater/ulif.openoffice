@@ -198,8 +198,6 @@ class MetaProcessor(BaseProcessor):
                 metadata = self._handle_error(
                     processor, input, output, metadata)
                 return None, metadata
-            if input != output:
-                remove_file_dir(input)
             input = output
         return input, metadata
 
@@ -305,7 +303,7 @@ class OOConvProcessor(BaseProcessor):
             out_format=filter_name,
             filter_props=filter_props,
             path=src,
-            out_dir=os.path.dirname(src),
+            out_dir=os.path.dirname(src) + '/',
             )
         metadata['oocp_status'] = status
         if status != 0:
